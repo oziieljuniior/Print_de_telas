@@ -63,7 +63,7 @@ while i <= i_0:
     if gg == [(1, (219, 0, 20))] or gg0 == [(1, (207, 9, 24))] or gg1 == [(1, (212, 0, 27))]:
         print('Fase 1 - Captura de Odd e Apostas')
         #areas de cortes pretendidas
-        area3 = (1305,380,1575,455)
+        area3 = (1295,380,1575,455)
         area4 = (1100,805,1145,823)
         area5 = (975,6,1017,21)
         #comando para realizar corte
