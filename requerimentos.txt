@@ -1,2 +1,4 @@
 pillow
 pyautogui
+pyscreenshot
+mouse
