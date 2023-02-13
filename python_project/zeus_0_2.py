@@ -81,9 +81,9 @@ while i <= i_0:
         name_apos = i + "T_Apostadores.png" 
         name_fr = i + "img.png" 
         #name_onl = i + "T_Hora.png" 
-        apos.save('/home/oziel/Documentos/Personal_project/Aviator/Print_de_telas/data1/qt_apostadores/' + name_apos)
+        apos.save('/home/oziel/Documentos/Personal_project/Aviator/Print_de_telas/data2/qt_apostadores/' + name_apos)
         #onl.save('/home/oziel/Documentos/Personal_project/Aviator/Print_de_telas/data1/' + name_onl)
-        fr.save('/home/oziel/Documentos/Personal_project/Aviator/Print_de_telas/data1/odds/' + name_fr)
+        fr.save('/home/oziel/Documentos/Personal_project/Aviator/Print_de_telas/data2/odds/' + name_fr)
         i = int(i)
         
         indice = "A" + str(indice_excel)
@@ -149,7 +149,7 @@ while i <= i_0:
                 odds = img3.crop(area2)
                 k = str(k)
                 name_odds = k + "Odds.png" 
-                odds.save("/home/oziel/Documentos/Personal_project/Aviator/Print_de_telas/data1/odds_gerais/" + name_odds)
+                odds.save("/home/oziel/Documentos/Personal_project/Aviator/Print_de_telas/data2/odds_gerais/" + name_odds)
                 k = int(k)
                 k = k+1
                 print("Tirou print das odds")
