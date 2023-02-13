@@ -13,6 +13,12 @@ import pyscreenshot as ImageGrab
 from PIL import Image
 from datetime import datetime
 #import mouse
+from openpyxl import Workbook
+
+wb = Workbook()
+ws = wb.active
+wb.title = "Hora_Apostas"
+indice_excel = 1
 
 #import pyautogui
 #Contadores
@@ -65,23 +71,27 @@ while i <= i_0:
         #areas de cortes pretendidas
         area3 = (1295,380,1575,455)
         area4 = (1100,805,1145,823)
-        area5 = (975,6,1017,21)
+        #area5 = (975,6,1017,21)
         #comando para realizar corte
         fr = img.crop(area3)
         apos = img.crop(area4)
-        onl = img.crop(area5)
+        #onl = img.crop(area5)
         #salvamento e contagem dos documento
         i = str(i)
         name_apos = i + "T_Apostadores.png" 
         name_fr = i + "img.png" 
-        name_onl = i + "T_Hora.png" 
-        apos.save('/home/oziel/Documentos/Personal_project/Aviator/Print_de_telas/data/' + name_apos)
-        onl.save('/home/oziel/Documentos/Personal_project/Aviator/Print_de_telas/data/' + name_onl)
-        fr.save('/home/oziel/Documentos/Personal_project/Aviator/Print_de_telas/data/' + name_fr)
+        #name_onl = i + "T_Hora.png" 
+        apos.save('/home/oziel/Documentos/Personal_project/Aviator/Print_de_telas/data1/qt_apostadores/' + name_apos)
+        #onl.save('/home/oziel/Documentos/Personal_project/Aviator/Print_de_telas/data1/' + name_onl)
+        fr.save('/home/oziel/Documentos/Personal_project/Aviator/Print_de_telas/data1/odds/' + name_fr)
         i = int(i)
+        
+        indice = "A" + str(indice_excel)
+        ws[indice] = datetime.now().strftime('%H:%M:%S')
         
         j = 0
         i = i + 1
+        indice_excel += 1
         #enquanto a odd estiver vermelha, não quebrar este comando de carregamento
         while gg == [(1, (219, 0, 20))] or gg0 == [(1, (207, 9, 24))] or gg1 == [(1, (212, 0, 27))]:
             #contagem de leituras ate mudança
@@ -139,7 +149,7 @@ while i <= i_0:
                 odds = img3.crop(area2)
                 k = str(k)
                 name_odds = k + "Odds.png" 
-                odds.save("/home/oziel/Documentos/Personal_project/Aviator/Print_de_telas/data/odds/" + name_odds)
+                odds.save("/home/oziel/Documentos/Personal_project/Aviator/Print_de_telas/data1/odds_gerais/" + name_odds)
                 k = int(k)
                 k = k+1
                 print("Tirou print das odds")
@@ -156,3 +166,4 @@ print("Começou:", comeco)
 fim = datetime.now().strftime('%H:%M:%S')
 print("Terminou em:",fim)
 print("Quantidade de odds coletadas: ", i + 1)
+wb.save('/home/oziel/Documentos/Personal_project/Aviator/Print_de_telas/python_project/hora_apostas.xlsx')
