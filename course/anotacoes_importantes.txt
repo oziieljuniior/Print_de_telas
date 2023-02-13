@@ -1,0 +1,36 @@
+- Saber o diretório padrão Rstudio
+getwd()
+- Alterar o diretório padrão Rstudio
+setwd("c:\\dados")
+*obs: Se utilizar o comando set no notebook do Rstudio, ele utilizará o comando apenas no bloco de trabalho.
+
+Declaração de variável
+
+delta<- 8  (valor real)
+delta<- 8L (valor inteiro)
+logico<- True
+logico<-F
+texto<- "Texto"
+
+Tipos de dados em Rstudio
+Matriz, Dataframe, Listas, Fatores
+
+Principais Funções no Rstudio
+- head(): Visualizar primeira linhas de um conjunto de dados
+- tail(): Visualizar últimas linhas de um conjunto de dados
+- summary(): Resumo estatístico de um conjunto de dados
+- file.chose(): Caminho do arquivo
+- dim(): Dimensões de um conjunto de dados(número de colunas e número de linhas)
+- length(): comprimento de um vetor
+- colnames(): Nomes das colunas de um conjunto de dados
+- rownames(): Nomes das linhas de um conjunto de dados
+- colbind(): adiciona coluna
+- predict(): função genérica de machine learning
+- read.csv(): Importa dados no disco
+
+Referência Adicional: R in action
+		      Visual Display of Quantitative Information - Eduard Tuft*
+		      Information Dashboard Desgin: The efffecrive Visual Communication Of Data
+		      Graphical Perception: Theory, Experimentation adn Application to the Development of Graphical Methods.
+                      Design Data Visualization - Noah Illinsky and Julie Steele*
+		      Forescasting: Principles and practice
