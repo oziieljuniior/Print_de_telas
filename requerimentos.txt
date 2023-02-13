@@ -5,3 +5,4 @@ mouse
 opencv-python
 pytesseract       #lembrar de instalar executavel ocr - windos/linux
 matplotlib
+openpyxl
