@@ -1,0 +1,83 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+
+Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Ctrl+Shift+Enter*. 
+
+```{r}
+choose.files()
+```
+```{r}
+dados <- read.csv("C:\\Users\\ozcon\\Google Drive\\Banco_de_dados\\course\\Secao9_Praticas_em_R-Limpeza_e_tratamento_de_dados\\dados\\tempo.csv",sep = ";", na.string = "", stringsAsFactors = T)
+head(dados)
+summary(dados)
+class(dados)
+colnames(dados)
+dim(dados)
+```
+```{r}
+dados$Aparencia
+summary(dados$Aparencia)
+dados[dados$Aparencia == "menos",]$Aparencia = "sol"
+dados$Aparencia = factor(dados$Aparencia)
+summary(dados$Aparencia)
+plot(dados$Aparencia)
+```
+
+
+```{r}
+dados$Temperatura
+boxplot(dados$Temperatura)
+boxplot(dados$Temperatura, outline = F)
+x = sd(dados$Temperatura, na.rm = T)
+
+dados[dados$Temperatura >= 2*x,]$Temperatura
+median(dados$Temperatura)
+dados[dados$Temperatura >= 2*x,]$Temperatura = median(dados$Temperatura)
+boxplot(dados$Temperatura)
+summary(dados$Temperatura)
+barplot(dados$Temperatura)
+```
+```{r}
+dados$Umidade
+summary(dados$Umidade)
+median(dados$Umidade, na.rm = T)
+dados[is.na(dados$Umidade),]$Umidade = median(dados$Umidade, na.rm = T) 
+dados[dados$Umidad >= 100,]$Umidade
+x1 = median(dados$Umidade, na.rm = T)
+dados[dados$Umidade>= 100,]$Umidade = x1
+boxplot(dados$Umidade, outline = F)
+boxplot(dados$Umidade)
+summary(dados$Umidade)
+```
+
+```{r}
+dados$Vento
+summary(dados$Vento)
+dados[is.na(dados$Vento),]$Vento = "FALSO"
+summary(dados$Vento)
+plot(dados$Vento)
+```
+```{r}
+dados$Jogar
+summary(dados$Jogar)
+plot(dados$Jogar)
+```
+
+```{r}
+summary(dados)
+```
+
+```{r}
+head(dados)
+summary(dados)
+```
+
+Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Ctrl+Alt+I*.
+
+When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Ctrl+Shift+K* to preview the HTML file).
+
+The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike *Knit*, *Preview* does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.
