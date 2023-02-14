@@ -2,14 +2,15 @@ import os
 import time
 from openpyxl import Workbook
 
-path = 'C:\\Users\\Riallen\\Documents\\Print_de_telas\\data2\\odds'
+#C:\\Users\\Riallen\\Documents\\Print_de_telas\\data2\\odds
+path = '/home/oziel/Documentos/Personal_project/Aviator/Print_de_telas/data2/odds'
 t = len(os.listdir(path))
 i = 0
 
 odds_hora = []
 
 while i < t:
-    name = "\\" + str(i) + "img.png"
+    name = "/" + str(i) + "img.png"
     #print(name)
     path_odds = path + name
     #print(path_odds)
@@ -34,5 +35,7 @@ while i < t:
 
     i += 1
     indece_excel += 1
+    
 
-wb.save("C:\\Users\\Riallen\\Documents\\Print_de_telas\\python_project\\odds_hora.xlsx")
+#C:\\Users\\Riallen\\Documents\\Print_de_telas\\python_project 
+wb.save("/home/oziel/Documentos/Personal_project/Aviator/Print_de_telas/python_project/odds_hora.xlsx ")
