@@ -6,3 +6,7 @@ opencv-python
 pytesseract       #lembrar de instalar executavel ocr - windos/linux
 matplotlib
 openpyxl
+pandas
+numpy
+seaborn
+statistics
