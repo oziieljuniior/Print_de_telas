@@ -8,19 +8,22 @@ import numpy as np
 wb = Workbook()
 ws = wb.active
 wb.title = "Aposta"
-indice_ex = 1
+indice_ex = 2
+ws['A1'] = 'Qt_Apostadores'
 
 i = 0 
 odd_original = []
 
+t = len(os.listdir('C:/Users/Riallen/Documents/Print_de_telas/data2/qt_apostadores'))
+
 #C:\Program Files\Tesseract-OCR\tesseract.exe
 pytesseract.tesseract_cmd = r'C:\\Program Files\\Tesseract-OCR\\tesseract.exe'
 
-while i <= 500:
-    #print("Imagem: ", i)
+while i <= (t - 1):
+    print("Imagem: ", i)
     name = str(i)+"T_Apostadores.png"
     #/home/oziel/Documentos/Personal_project/Aviator/Print_de_telas/data/qt_apostadores/
-    name_path = "C:/Users/Riallen/Documents/Print_de_telas/data1/qt_apostadores/" + name
+    name_path = "C:/Users/Riallen/Documents/Print_de_telas/data2/qt_apostadores/" + name
     image = cv2.imread(name_path)
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     kernel = np.ones((1,1),np.float32)/25
@@ -43,7 +46,7 @@ print(len(odd_original))
 # =============================================================================
 # # =============================================================================
 apostadores_editada = []
-bad = ["\n", '.']
+bad = ["\n", '.'," "]
 for name in odd_original:
     for i in bad:
         name = name.replace(i,"")
@@ -56,7 +59,7 @@ print(len(apostadores_editada))
 # # 
 i = 0
 # # 
-while i <= 500:
+while i <= (t - 1):
     ap = 'A' + str(indice_ex)
     ws[ap] = apostadores_editada[i]
 # #     
@@ -65,36 +68,3 @@ while i <= 500:
 #/home/oziel/Documentos/Personal_project/Aviator/Print_de_telas/
 name = 'C:\\Users\\Riallen\\Documents\\Print_de_telas\\qt_apostadores1.xlsx'  
 wb.save(name)
-# #     
-# =============================================================================
-# =============================================================================
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    

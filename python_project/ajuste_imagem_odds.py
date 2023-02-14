@@ -54,34 +54,3 @@ while i <= 250:
     i += 1
 name = '/home/oziel/Documentos/Personal_project/Aviator/Print_de_telas/odd.xlsx'  
 wb.save(name)
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
