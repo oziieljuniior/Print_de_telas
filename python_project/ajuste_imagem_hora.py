@@ -38,4 +38,5 @@ while i < t:
     
 
 #C:\\Users\\Riallen\\Documents\\Print_de_telas\\python_project 
-wb.save("/home/oziel/Documentos/Personal_project/Aviator/Print_de_telas/python_project/odds_hora.xlsx ")
+name = "/home/oziel/Documentos/Personal_project/Aviator/Print_de_telas/python_project/odds_hora1.xlsx"
+wb.save(name)
