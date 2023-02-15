@@ -10,3 +10,7 @@ pandas
 numpy
 seaborn
 statistics
+scipy
+statsmodels
+scikit-learn
+yellowbrick
