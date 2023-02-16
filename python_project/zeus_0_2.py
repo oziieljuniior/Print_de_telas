@@ -22,11 +22,11 @@ indice_excel = 1
 
 #import pyautogui
 #Contadores
-i_0 = int(input("Quantidade de amostras pretendida: "))
+i_0 = int(input("Quantidade de amostras pretendida por pasta: "))
 i = 0 #Quantidade de amostras pretendida
 j = 0 #Contador
 k = 0
-l = 0
+
 comeco = datetime.now().strftime('%H:%M:%S')
 #identificador de odd vermelha
 while i <= i_0:
@@ -69,8 +69,8 @@ while i <= i_0:
     if gg == [(1, (219, 0, 20))] or gg0 == [(1, (207, 9, 24))] or gg1 == [(1, (212, 0, 27))]:
         print('Fase 1 - Captura de Odd e Apostas')
         #areas de cortes pretendidas
-        area3 = (1295,380,1575,455)
-        area4 = (1100,805,1145,823)
+        area3 = (1285,380,1585,455)
+        area4 = (1098,795,1200,850)
         #area5 = (975,6,1017,21)
         #comando para realizar corte
         fr = img.crop(area3)
@@ -81,9 +81,9 @@ while i <= i_0:
         name_apos = i + "T_Apostadores.png" 
         name_fr = i + "img.png" 
         #name_onl = i + "T_Hora.png" 
-        apos.save('/home/oziel/Documentos/Personal_project/Aviator/Print_de_telas/data2/qt_apostadores/' + name_apos)
+        apos.save('/home/oziel/Documentos/Personal_project/Aviator/Print_de_telas/data3/qt_apostadores/' + name_apos)
         #onl.save('/home/oziel/Documentos/Personal_project/Aviator/Print_de_telas/data1/' + name_onl)
-        fr.save('/home/oziel/Documentos/Personal_project/Aviator/Print_de_telas/data2/odds/' + name_fr)
+        fr.save('/home/oziel/Documentos/Personal_project/Aviator/Print_de_telas/data3/odds/' + name_fr)
         i = int(i)
         
         indice = "A" + str(indice_excel)
@@ -92,6 +92,8 @@ while i <= i_0:
         j = 0
         i = i + 1
         indice_excel += 1
+        l = 0
+
         #enquanto a odd estiver vermelha, não quebrar este comando de carregamento
         while gg == [(1, (219, 0, 20))] or gg0 == [(1, (207, 9, 24))] or gg1 == [(1, (212, 0, 27))]:
             #contagem de leituras ate mudança
@@ -140,7 +142,7 @@ while i <= i_0:
             print("Resto da divisão:", d0)
             d0 = int(d0)
             #Se o minuto tiver resto 0 ou 6, tire print da tela
-            if d0 == 0 or d0 == 6:
+            if (d0 == 0 or d0 == 6) and l == 0:
                 #comando para tirar print da tela 
                 imagem2 = ImageGrab.grab()
                 imagem2.save('/home/oziel/Documentos/Personal_project/Aviator/Print_de_telas/python_project/search/tela0.jpeg', 'jpeg')
@@ -149,7 +151,7 @@ while i <= i_0:
                 odds = img3.crop(area2)
                 k = str(k)
                 name_odds = k + "Odds.png" 
-                odds.save("/home/oziel/Documentos/Personal_project/Aviator/Print_de_telas/data2/odds_gerais/" + name_odds)
+                odds.save("/home/oziel/Documentos/Personal_project/Aviator/Print_de_telas/data3/odds_gerais/" + name_odds)
                 k = int(k)
                 k = k+1
                 print("Tirou print das odds")
@@ -157,6 +159,7 @@ while i <= i_0:
              #   print("Clicou na tela")
               #  mouse.move(2025,75, absolute = True, duration = 0.01)
                # mouse.click('right')
+                l += 1
             else:
                 print("Não fez nada")
 
