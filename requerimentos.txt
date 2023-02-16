@@ -2,6 +2,7 @@ pillow
 pyautogui
 pyscreenshot
 mouse
+pynput
 opencv-python
 pytesseract       #lembrar de instalar executavel ocr - windos/linux
 matplotlib
