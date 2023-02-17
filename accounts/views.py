@@ -1,14 +1,18 @@
 # Create your views here.
 
-from django.shortcuts import render, redirect, HttpResponseRedirect
+from django.shortcuts import render, redirect, reverse, HttpResponseRedirect
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import login
+from django.contrib import messages
+from django.core.paginator import Paginator
+from django.urls import reverse_lazy
+from django.views import View
+
 from .models import Profile, System_Post
 from .forms import SystemForm, UserRegisterForm
-from django.contrib.auth import login
-from django.contrib.auth.decorators import login_required
-from django.urls import reverse
-from django.contrib import messages
-from django.views import View
-from django.core.paginator import Paginator
+
+
+
 
 
 
@@ -27,24 +31,32 @@ def dashboard(request):
         "-created_at")
     return render(request, "system_list/dashboard.html", {"form": form, "post": followed_pots})
 
+class ProfileListView(View):
+    templat_name = 'system_list/profile_list.html'    
+    model = Profile
+    paginate_by = 10
     
+    def get(self, request):
+        profile = self.model.objects.all().prefetch_related('user')
+        paginator = Paginator(profile, self.paginate_by)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+        context = {'page_obj': page_obj}
+        return render(request, self.templat_name, context)
 
-def profile_list(request):
-    profiles = Profile.objects.all()
-    paginator = Paginator(profiles, 10)
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
-    context = {'page_obj': page_obj}
-    return render(request, "system_list/profile_list.html", context)
-
-
-def profile(request, pk):
-    if not hasattr(request.user, 'profile'):
-        missing_profile = Profile(user=request.user)
-        missing_profile.save()
-    profile = Profile.objects.get(pk=pk)
-    if request.method == "POST":
+class ProfileView(View):
+    template_name = 'system_list/profile.html'
+    
+    def get(self, request, pk):
+        if not hasattr(request.user, 'profile'):
+            missing_profile = Profile(user = request.user)
+            missing_profile.save()
+        profile = Profile.objects.select_related('user').get(pk = pk)
+        context = {"profile": profile}
+        return render(request, self.template_name, context)
+    def post(self, request, pk):
         current_user_profile = request.user.profile
+        profile = Profile.objects.get(pk = pk)
         data = request.POST
         action = data.get("follow")
         if action == "follow":
@@ -52,8 +64,7 @@ def profile(request, pk):
         elif action == "unfollow":
             current_user_profile.follows.remove(profile)
         current_user_profile.save()
-    return render(request, "system_list/profile.html", {"profile": profile})
-
+        return redirect(reverse_lazy("System_Post:profile"), kwargs={'pk':pk})
 
 def register(request):
     if request.method=='POST':
@@ -61,7 +72,7 @@ def register(request):
         if form.is_valid():
             form.save()
             messages.success(request, 'Seu registro foi criado com sucesso!')
-            return HttpResponseRedirect(reverse('login'))
+            return redirect(reverse_lazy('login'))
     else:
         form=UserRegisterForm()
     args={'form':form}
