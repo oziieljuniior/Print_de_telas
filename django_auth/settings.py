@@ -127,3 +127,20 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/accounts/login"
 
+#Email settings
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'seu-email@gmail.com' #adicione seu email aqui
+EMAIL_HOST_PASSWORD = 'sua-senha' #Adicione sua senha aqui
+
+#Password reset settings
+EMAIL_FROM_ADDRESS = 'seu-email@gmail.com'
+EMAIL_SUBJECT_PREFIX = '[System Post]'
+
+#Ajuste os links de acordo com a URL do projeto
+#LOGIN_REDIRECT_URL = '/'
+#LOGIN_URL = '/login/'
+#LOGOUT_URL = '/logout/'
+

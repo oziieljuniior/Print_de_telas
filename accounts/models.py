@@ -4,7 +4,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name= 'profile')
     follows = models.ManyToManyField(
         "self",
         related_name="followed_by",
@@ -24,7 +24,7 @@ def create_profile(sender, instance, created, **kwargs):
 
 class System_Post(models.Model):
     user = models.ForeignKey(
-        User, related_name="System_Post", on_delete=models.DO_NOTHING
+        User, related_name="System_Post", on_delete=models.CASCADE
     )
     body = models.CharField(max_length=140)
     created_at = models.DateTimeField(auto_now_add=True)

@@ -1,0 +1,32 @@
+/* Define a cor de fundo do corpo de uma página */
+body {
+    background-color: #f1f1f1;
+}
+/* Define a cor do texto dos cabeçalhos */
+h1, h2, h3 {
+    color: #333;
+}
+/* Define a cor do texto dos links */
+a {
+    color: blue
+}
+/* Define o tamanho da fonte do texto principal */
+p {
+    font-size: 16px;
+}
+/* Define a largura máxima do container */
+.container{
+    max-width: 800px;
+    margin: 0 auto;
+}
+/* Define um estilo de borda para botões */
+button{
+    border: 1px solid #ccc;
+    padding: 10px;
+    background-color: #fff;
+    color: #333;
+    border-radius: 5px;
+}
+
+
+
