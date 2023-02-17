@@ -1,12 +1,12 @@
 from django.urls import path
-from .views import dashboard, profile_list, profile, register
+from .views import dashboard, register, ProfileListView, ProfileView
 from django.conf.urls import include
 
 app_name = "System_Post"
 
 urlpatterns = [
     path("", dashboard, name="dashboard"),
-    path("profile_list/", profile_list, name="profile_list"),
-    path("profile/<int:pk>", profile, name="profile"),
+    path("profile/", ProfileListView.as_view(), name="profile_list"),
+    path("profile/<int:pk>", ProfileView.as_view(), name="profile"),
     path("accounts/", include("django.contrib.auth.urls")),
 ]
