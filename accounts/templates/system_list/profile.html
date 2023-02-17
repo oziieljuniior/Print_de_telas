@@ -19,7 +19,7 @@
                 Unfollow
             </button>
         {% else %}
-            <button class="button is-success is-rounded" name="follow" value="follow">
+            <button class="button is-success is-rounded follow-btn" name="follow" value="follow" aria-label='Follow {{ profile.user.username }}'>
                 Follow
             </button>
             <button class="button is-danger is-static is-rounded">Unfollow</button>
@@ -30,8 +30,8 @@
         {% for system in profile.user.System_Post.all %}
             <div class="box">
                 {{ system.body }}
-                <span class="is-small has-text-grey-light">
-                    ({{ system.created_at }})
+                <span class="is-small has-text-grey-light" datetime="{{ system.created_at|date:"c" }}">
+                    ({{ system.created_at|date:'F j, Y, g:i a' }})
                 </span>
             </div>
         {% endfor %}

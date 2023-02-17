@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from django.contrib import messages
 from django.views import View
+from django.core.paginator import Paginator
 
 
 
@@ -29,8 +30,11 @@ def dashboard(request):
     
 
 def profile_list(request):
-    profiles = Profile.objects.exclude(user=request.user)
-    return render(request, "system_list/profile_list.html", {"profiles": profiles})
+    profiles = Profile.objects.all()
+    paginator = Paginator(profiles, 10)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(request, "system_list/profile_list.html", {"page_obj": page_obj})
 
 
 def profile(request, pk):
@@ -61,4 +65,5 @@ def register(request):
         form=UserRegisterForm()
     args={'form':form}
     return render(request,'register.html',args)
+
 
