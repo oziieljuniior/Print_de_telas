@@ -14,29 +14,13 @@
 <body>
     <section class="hero is-small is-info mb-4">
         <div class="hero-body">
-            <h1 class="title is-1">System Post</h1>
+            <h1 class="title is-1">Sytem Post</h1>
             <p class="subtitle is-4">
                 Um site melhor</p>
         </div>
     </section>
     <div class="container">
-        <div class="tabs is-centered mb-4">
-            <ul>
-                <li {% if request.path == '/' %}class="is-active"{% endif %}>
-                    <a href="{% url 'System_Post:dashboard' %}">Home</a>
-                </li>
-                <li {% if '/profile/' in request.path %}class="is-active"{% endif %}>
-                    <a href="{% url 'System_Post:profile' request.user.profile.pk[0] %}">Perfil</a>
-                </li>
-                <li>
-                    <form action="{% url 'logout' %}" method="post">
-                        {% csrf_token %}
-                        <button class="button is-link is-light" type="submit">Sair</button>
-                    </form>
-                </li>
-            </ul>
-        </div>
-        <div class="content">
+        <div class = "content">
             {% block content %}
             {% endblock content %}
         </div>
@@ -44,10 +28,12 @@
         <footer class="footer">
             <div class="content has-text-centered">
                 <p>
-                    © {{ year }} System Post. Todos os direitos reservados.
+                    © {{ year }} Sytem Post. All rights reserved.
                 </p>
             </div>
         </footer>
     </div>
 </body>
+
+
 </html>
