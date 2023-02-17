@@ -2,7 +2,6 @@ from django.urls import path
 from .views import dashboard, profile_list, profile, register
 from django.conf.urls import include
 
-
 app_name = "System_Post"
 
 urlpatterns = [
