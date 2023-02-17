@@ -34,7 +34,8 @@ def profile_list(request):
     paginator = Paginator(profiles, 10)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    return render(request, "system_list/profile_list.html", {"page_obj": page_obj})
+    context = {'page_obj': page_obj}
+    return render(request, "system_list/profile_list.html", context)
 
 
 def profile(request, pk):
