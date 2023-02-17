@@ -16,3 +16,4 @@ statsmodels
 scikit-learn
 yellowbrick
 pmdarima
+django
