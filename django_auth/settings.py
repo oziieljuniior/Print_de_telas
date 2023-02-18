@@ -133,11 +133,12 @@ LOGOUT_REDIRECT_URL = "/accounts/login"
 
 #Email settings
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
+EMAIL_HOST = 'your_email_host'
+EMAIL_PORT = 'your_email_port'
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'seu-email@gmail.com' #adicione seu email aqui
-EMAIL_HOST_PASSWORD = 'sua-senha' #Adicione sua senha aqui
+EMAIL_USE_SSL = False
+EMAIL_HOST_USER = 'your_email_address' #adicione seu email aqui
+EMAIL_HOST_PASSWORD = 'your_email_password' #Adicione sua senha aqui
 
 #Password reset settings
 EMAIL_FROM_ADDRESS = 'seu-email@gmail.com'

@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.utils import timezone
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name= 'profile')
@@ -37,11 +38,8 @@ class System_Post(models.Model):
         )
 
 class Mymodel(models.Model):
-    campo1 = models.IntegerField()
-    campo2 = models.CharField(max_length=10)
-    campo3 = models.CharField(max_length=25)
-    campo4 = models.CharField(max_length=6)
+    id = models.AutoField(primary_key=True)
+    odd = models.DecimalField(default = 0.0, max_digits=7, decimal_places=2)
+    hora_criacao = models.DateTimeField(default = timezone.now)
+    apostadores = models.IntegerField()
     
-    def __str__(self):
-        return self.campo1, self.campo2, self.campo3, self.campo4    
-

@@ -1,12 +1,15 @@
 # Create your views here.
 
-from django.shortcuts import render, redirect, reverse, HttpResponseRedirect
+from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login
 from django.contrib import messages
 from django.core.paginator import Paginator
 from django.urls import reverse_lazy
 from django.views import View
+from django.views.generic import ListView, DetailView, CreateView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db import connection
 
 
 from .models import Profile, System_Post, Mymodel
@@ -15,72 +18,75 @@ from .forms import SystemForm, UserRegisterForm
 
 
 
+POSTS_PER_PAGE = 10
 
-
-@login_required
-def dashboard(request):
-    if request.method == "POST":
+class DashboardView(LoginRequiredMixin, View):
+    template_name = 'system_list/dashboard.html'
+    
+    def get(self, request):
+        form = SystemForm()
+        followed_pots = System_Post.objects.filter(user__profile__in=request.user.profile.follows.all()).order_by(
+            "-created_at")
+        return render(request, self.template_name, {'form': form, 'post': followed_pots})
+    
+    def post(self, request):
         form = SystemForm(request.POST or None)
         if form.is_valid():
             system = form.save(commit=False)
             system.user = request.user
             system.save()
             return redirect("System_Post:dashboard")
-    else:
-        form = SystemForm()
-    followed_pots = System_Post.objects.filter(user__profile__in=request.user.profile.follows.all()).order_by(
-        "-created_at")
-    return render(request, "system_list/dashboard.html", {"form": form, "post": followed_pots})
+        followed_pots = System_Post.objects.filter(user__profile__in=request.user.profile.follows.all()).order_by("-created_at")
+        return render(request, self.template_name, {"form": form, "post": followed_pots})
 
 class ProfileListView(View):
     templat_name = 'system_list/profile_list.html'    
     model = Profile
-    paginate_by = 10
+    paginate_by = POSTS_PER_PAGE
+    context_object_name = 'profile'
     
-    def get(self, request):
-        profile = self.model.objects.all().prefetch_related('user')
-        paginator = Paginator(profile, self.paginate_by)
-        page_number = request.GET.get('page')
-        page_obj = paginator.get_page(page_number)
-        context = {'page_obj': page_obj}
-        return render(request, self.templat_name, context)
+    def get_queryset(self):
+        return super().get_queryset().prefetch_related('user')
 
 class ProfileView(View):
     template_name = 'system_list/profile.html'
+    model = Profile
+    context_object_name = 'profile'
     
-    def get(self, request, pk):
-        if not hasattr(request.user, 'profile'):
-            missing_profile = Profile(user = request.user)
-            missing_profile.save()
-        profile = Profile.objects.select_related('user').get(pk = pk)
-        context = {"profile": profile}
-        return render(request, self.template_name, context)
-    def post(self, request, pk):
-        current_user_profile = request.user.profile
-        profile = Profile.objects.get(pk = pk)
-        data = request.POST
-        action = data.get("follow")
+    def post(self, request, pk, *args, **kwargs):
+        profile = self.get_object()
+        action = request.POST.get("follow")
         if action == "follow":
-            current_user_profile.follows.add(profile)
+            request.user.profile.follows.add(profile)
         elif action == "unfollow":
-            current_user_profile.follows.remove(profile)
-        current_user_profile.save()
-        return redirect(reverse_lazy("System_Post:profile"), kwargs={'pk':pk})
+            request.user.profile.follows.remove(profile)
+        request.user.profile.save()
+        return redirect(reverse_lazy("System_Post:profile"), kwargs={'pk':profile.pk})
 
-def register(request):
-    if request.method=='POST':
+class RegisterView(View):
+    template_name = 'registration/register.html'
+    
+    def get(self,request):
+        form = UserRegisterForm()
+        return render(request, self.template_name, {'form': form})
+    
+    def post(self, request):
         form= UserRegisterForm(request.POST)
         if form.is_valid():
             form.save()
             messages.success(request, 'Seu registro foi criado com sucesso!')
             return redirect(reverse_lazy('login'))
-    else:
-        form=UserRegisterForm()
-    args={'form':form}
-    return render(request,'registration/register.html',args)
+    
+        args={'form':form}
+        return render(request,self.template_name,args)
 
 
-def my_view(request):
-    data = Mymodel.objects.all()
-    return render(request, 'system_list/my_template.html', {'data': data})
+class MyModelView(View):
+    template_name = 'system_list/my_template.html'
+    def get(self,request):
+        with connection.cursor() as cursor:
+            cursor.execute("SELECT * FROM odds")
+            rows = cursor.fetchall()
+        context = {'rows': rows}
+        return render(request, self.template_name, {'data': rows})
 
