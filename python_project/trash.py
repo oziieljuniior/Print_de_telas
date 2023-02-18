@@ -1,10 +1,14 @@
-from pynput import mouse
+import mysql.connector
 
-def on_click(x,y,button,pressed):
-    if pressed:
-        print(button,x,y)
-        print(type(x))
-        print(type(y))
-        print(type(button))
-with mouse.Listener(on_click=on_click) as listener:
-    listener.join()
+mydb = mysql.connector.connect(
+            host = "localhost",
+            user = "root",
+            password = "14072849",
+            database = "Aviator"
+        )
+
+mycursor = mydb.cursor()
+
+sql = "INSERT INTO odds (id, odd, hora_criacao, apostadores) VALUES (%s,%s,%s,%s)"
+
+values = 

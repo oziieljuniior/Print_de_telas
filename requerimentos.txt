@@ -17,3 +17,5 @@ scikit-learn
 yellowbrick
 pmdarima
 django
+mysqlclient      #lembrar de instalar as dependencias para utilizar um banco de dados
+mysql-connector-python

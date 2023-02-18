@@ -77,8 +77,12 @@ WSGI_APPLICATION = "django_auth.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.mysql",
+        "NAME": "Aviator",
+        'USER': 'root',
+        'PASSWORD': '14072849',
+        'HOST': 'localhost',
+        'PORT': '',
     }
 }
 

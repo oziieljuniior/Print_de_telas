@@ -4,6 +4,19 @@ import pytesseract
 from matplotlib import pyplot as plt
 import numpy as np
 import time
+import mysql.connector
+
+mydb = mydb = mysql.connector.connect(
+            host = "localhost",
+            user = "root",
+            password = "14072849",
+            database = 'Aviator'
+        )
+
+mycursor = mydb.cursor()
+
+sql = "INSERT INTO odds (id, odd, hora_criacao, apostadores) VALUES (%s,%s,%s,%s)"
+
 
 i = 0
 odd_original = []
@@ -63,10 +76,18 @@ while i <= i_0:
         print("Hora da criação: ", creation_time)
         print("Apostadores: ", text2)
 
+        values = (i, text1,creation_time,text2)
+        
+        mycursor.execute(sql,values)
+        
+        mydb.commit()
+         
+
         i += 1
         
         
     else:
         print("Esperando atualização")
     
-    
+mycursor.close()
+mydb.close()

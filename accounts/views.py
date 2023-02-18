@@ -8,7 +8,8 @@ from django.core.paginator import Paginator
 from django.urls import reverse_lazy
 from django.views import View
 
-from .models import Profile, System_Post
+
+from .models import Profile, System_Post, Mymodel
 from .forms import SystemForm, UserRegisterForm
 
 
@@ -78,4 +79,8 @@ def register(request):
     args={'form':form}
     return render(request,'registration/register.html',args)
 
+
+def my_view(request):
+    data = Mymodel.objects.all()
+    return render(request, 'system_list/my_template.html', {'data': data})
 

@@ -36,5 +36,12 @@ class System_Post(models.Model):
             f"{self.body[:30]}..."
         )
 
-
+class Mymodel(models.Model):
+    campo1 = models.IntegerField()
+    campo2 = models.CharField(max_length=10)
+    campo3 = models.CharField(max_length=25)
+    campo4 = models.CharField(max_length=6)
+    
+    def __str__(self):
+        return self.campo1, self.campo2, self.campo3, self.campo4    
 
