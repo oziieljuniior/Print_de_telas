@@ -1,24 +1,41 @@
 {% extends 'base.html' %}
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 {% block content %}
-<table>
-    <thread>
-        <tr>
-            <th> id </th>
-            <th> odd </th>
-            <th> hora_criacao </th>
-            <th> apostadores </th>
-        </tr>
-    </thread>
-    <tbody>
-        {% for obj in data %}
-        <tr>
-            <td> {{ obj.0 }}</td>
-            <td> {{ obj.1 }}</td>
-            <td> {{ obj.2 }}</td>
-            <td> {{ obj.3 }}</td>
-        </tr>
-        {%endfor %}
-    </tbody>
-</table>
+<div id="table-containter">
+    <table>
+        <thread>
+            <tr>
+                <th> id </th>
+                <th> odd </th>
+                <th> hora_criacao </th>
+                <th> apostadores </th>
+            </tr>
+        </thread>
+        <tbody>
+            {% for obj in data %}
+            <tr>
+                <td> {{ obj.0 }}</td>
+                <td> {{ obj.1 }}</td>
+                <td> {{ obj.2 }}</td>
+                <td> {{ obj.3 }}</td>
+            </tr>
+            {%endfor %}
+        </tbody>
+    </table>
+</div>
 {% endblock %}
+
+<script>
+    function loadTableData(){
+        $.get("{% url 'system_list:mytemplate' %}", function(data){
+            $("#table-containter").htmll(data);
+        });
+    }
+</script>
+<script>
+    setInterval(function(){
+        loadTableData();
+    }, 3000);
+</script>
