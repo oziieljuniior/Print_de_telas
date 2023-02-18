@@ -27,15 +27,19 @@
 </div>
 {% endblock %}
 
-<script>
-    function loadTableData(){
-        $.get("{% url 'system_list:mytemplate' %}", function(data){
-            $("#table-containter").htmll(data);
-        });
-    }
-</script>
-<script>
-    setInterval(function(){
-        loadTableData();
-    }, 3000);
-</script>
+{% block javascript %}
+    <script>
+        function loadTableData(){
+            $.get("{% url 'my_url' %}", function(data){
+                $("#table-containter").html(data);
+            });
+        }
+        console.log('Função loadTableData() foi chamada!');
+    </script>
+    <script>
+        setInterval(function(){
+            loadTableData();
+        }, 3000);
+        console.log('LoadTableData() foi chamada pelo setInterval!');
+    </script>
+{% endblock %}
