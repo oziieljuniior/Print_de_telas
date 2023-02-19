@@ -36,6 +36,7 @@ while i <= i_0:
     
     print(t1,t2, i)
     if t1 == i + 1 and t2 == i + 1:
+        time.sleep(2)
         name1 = caminho_odds + "/" + str(i) + 'img.png'
         image1 = cv2.imread(name1)
         gray1 = cv2.cvtColor(image1, cv2.COLOR_BGR2GRAY)
