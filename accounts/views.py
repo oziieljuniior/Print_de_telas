@@ -4,7 +4,11 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.urls import reverse_lazy
 from django.views import View
-from django.views.generic import TemplateView
+from django.views.decorators.http import require_http_methods
+from django.utils.decorators import method_decorator
+from django.db.models import Q 
+
+from django.views.generic import TemplateView, ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db import connection
 
@@ -18,7 +22,8 @@ from .forms import SystemForm, UserRegisterForm
 
 POSTS_PER_PAGE = 10
 
-class DashboardView(LoginRequiredMixin, View):
+@method_decorator(require_http_methods(["GET"]), name = 'dispatch')
+class DashboardView(View):
     template_name = 'system_list/dashboard.html'
     
     def get(self, request):
@@ -27,6 +32,7 @@ class DashboardView(LoginRequiredMixin, View):
             "-created_at")
         return render(request, self.template_name, {'form': form, 'post': followed_pots})
     
+    @method_decorator(require_http_methods(["POST"]))
     def post(self, request):
         form = SystemForm(request.POST or None)
         if form.is_valid():
@@ -41,10 +47,23 @@ class ProfileListView(View):
     templat_name = 'system_list/profile_list.html'    
     model = Profile
     paginate_by = POSTS_PER_PAGE
-    context_object_name = 'profile'
+    context_object_name = 'profiles'
+    
     
     def get_queryset(self):
-        return super().get_queryset().prefetch_related('user')
+        return self.model.objects.all().prefetch_related('user')
+    
+    
+    def get(self, request):
+        profiles = self.get_queryset()
+        context = {'profile_list': profiles}
+        return render(request, self.templat_name, context)
+        
+    def post(self, request, *args, **kwargs):
+        pass
+    
+    
+    
 
 class ProfileView(View):
     template_name = 'system_list/profile.html'
