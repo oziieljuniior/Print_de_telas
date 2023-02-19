@@ -1,6 +1,6 @@
 # Create your views here.
 
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.urls import reverse_lazy
 from django.views import View
@@ -11,6 +11,7 @@ from django.db.models import Q
 from django.views.generic import TemplateView, ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db import connection
+
 
 
 
@@ -44,7 +45,7 @@ class DashboardView(View):
         return render(request, self.template_name, {"form": form, "post": followed_pots})
 
 class ProfileListView(View):
-    templat_name = 'system_list/profile_list.html'    
+    template_name = 'system_list/profile_list.html'    
     model = Profile
     paginate_by = POSTS_PER_PAGE
     context_object_name = 'profiles'
@@ -57,7 +58,7 @@ class ProfileListView(View):
     def get(self, request):
         profiles = self.get_queryset()
         context = {'profile_list': profiles}
-        return render(request, self.templat_name, context)
+        return render(request, self.template_name, context)
         
     def post(self, request, *args, **kwargs):
         pass
@@ -70,6 +71,15 @@ class ProfileView(View):
     model = Profile
     context_object_name = 'profile'
     
+    def get_object(self, **kwargs):
+        pk = self.kwargs.get('pk')
+        return get_object_or_404(Profile, pk = pk)
+    
+    def get(self, request, pk):
+        profile = self.get_object()
+        context = {'profile': profile}
+        return render(request, self.template_name, context)
+    
     def post(self, request, pk, *args, **kwargs):
         profile = self.get_object()
         action = request.POST.get("follow")
@@ -78,7 +88,8 @@ class ProfileView(View):
         elif action == "unfollow":
             request.user.profile.follows.remove(profile)
         request.user.profile.save()
-        return redirect(reverse_lazy("System_Post:profile"), kwargs={'pk':profile.pk})
+        profile_pk = request.user.profile.pk
+        return redirect(reverse_lazy("System_Post:profile", kwargs={'pk':profile_pk}))
 
 class RegisterView(View):
     template_name = 'registration/register.html'
@@ -108,8 +119,17 @@ class MyModelView(View):
         return render(request, self.template_name, context)
     
 
-class HomePageView(TemplateView):
+class HomePageView(TemplateView, LoginRequiredMixin):
     template_name = 'system_list/home.html'
+    
+    def dispatch(self, request, **kwargs):
+        if request.user.is_authenticated:
+            posts = System_Post.objects.all()
+            context = {'posts': posts}
+            return render(request,self.template_name, context)
+        else:
+            return redirect(reverse_lazy('login'))
+    
     
 def settings(request):
     return render(request, 'system_list/settings.html')
