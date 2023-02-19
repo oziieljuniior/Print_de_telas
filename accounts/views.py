@@ -1,15 +1,13 @@
 # Create your views here.
 
 from django.shortcuts import render, redirect
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth import login
 from django.contrib import messages
-from django.core.paginator import Paginator
 from django.urls import reverse_lazy
 from django.views import View
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db import connection
+
 
 
 from .models import Profile, System_Post, Mymodel
@@ -87,6 +85,23 @@ class MyModelView(View):
         with connection.cursor() as cursor:
             cursor.execute("SELECT * FROM odds")
             rows = cursor.fetchall()
-        context = {'rows': rows}
-        return render(request, self.template_name, {'data': rows})
+        context = {'data': rows}
+        return render(request, self.template_name, context)
+    
 
+class HomePageView(TemplateView):
+    template_name = 'system_list/home.html'
+    
+def settings(request):
+    return render(request, 'system_list/settings.html')
+
+def help(request):
+    return render(request, "help/help.html")
+
+def about(request):
+    return render(request, "help/about.html")
+def faq(request):
+    return render(request, "help/faq.html")
+
+def contact(request):
+    return render(request, 'help/contact.html')
