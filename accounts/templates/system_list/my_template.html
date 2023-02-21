@@ -5,14 +5,14 @@
 {% block content %}
 <div class="container">
     <table class="table" id="my-table">
-        <thread>
+        <thead>
             <tr>
                 <th> ID </th>
                 <th> Odd </th>
                 <th> Hora da Odd </th>
                 <th> Apostadores </th>
             </tr>
-        </thread>
+        </thead>
         <tbody>
         </tbody>
     </table>
@@ -22,17 +22,24 @@
 {% block javascript %}
     <script>
         function loadTableData(){
-            $.get("{% url 'my_url' %}", function(data){(
-                $("#my-table tbody").empty();
+            $.get("{% url 'my_url' %}", function(data){
+                if (data && Array.isArray(data)){
+                    $("#my-table tbody").empty();
 
-                $.each(data, function(index,row)){
-                    var $row = $("<tr></tr>");
-                    $("<td></td>").text(row.id).appendTo($row);
-                    $("<td></td>").text(row.odd).appendTo($row);
-                    $("<td></td>").text(row.hora_criacao).appendTo($row);
-                    $("<td></td>").text(row.apostadores).appendTo($row);
-                    $row.appendTo("#my-table tbody");
-                });
+                    $.each(data, function(index,row)){
+                        var $row = $("<tr></tr>");
+                        $("<td></td>").text(row.id).appendTo($row);
+                        $("<td></td>").text(row.odd).appendTo($row);
+                        $("<td></td>").text(row.hora_criacao).appendTo($row);
+                        $("<td></td>").text(row.apostadores).appendTo($row);
+                        $row.appendTo("#my-table tbody");
+                    });
+                } else {
+                    console.error("Data is invalid or not an array");
+                }
+                
+            }).fail(function(){
+                console.error("Failed to load data");
             });
         }
 
