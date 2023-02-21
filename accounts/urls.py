@@ -5,7 +5,7 @@ from django.conf.urls import include
 app_name = "System_Post"
 
 urlpatterns = [
-    path("", DashboardView.as_view() , name="dashboard"),
+    path("", DashboardView.as_view() , name = "dashboard"),
     path("settings/", settings, name = "settings"),
     path("profile_list/", ProfileListView.as_view(), name="profile_list"),
     path("profile/<int:pk>/", ProfileView.as_view(), name="profile"),

@@ -26,12 +26,17 @@ POSTS_PER_PAGE = 10
 @method_decorator(require_http_methods(["GET"]), name = 'dispatch')
 class DashboardView(View):
     template_name = 'system_list/dashboard.html'
+    login_url = reverse_lazy('login')
     
     def get(self, request):
-        form = SystemForm()
-        followed_pots = System_Post.objects.filter(user__profile__in=request.user.profile.follows.all()).order_by(
-            "-created_at")
-        return render(request, self.template_name, {'form': form, 'post': followed_pots})
+        if request.user.is_authenticated:
+            form = SystemForm()
+            followed_pots = System_Post.objects.filter(user__profile__in=request.user.profile.follows.all()).order_by(
+                "-created_at")
+            return render(request, self.template_name, {'form': form, 'post': followed_pots})
+        else:
+            return redirect(self.login_url)
+    
     
     @method_decorator(require_http_methods(["POST"]))
     def post(self, request):
@@ -56,7 +61,7 @@ class ProfileListView(View):
     
     
     def get(self, request):
-        profiles = self.get_queryset()
+        profiles = self.model.objects.exclude(user = request.user)
         context = {'profile_list': profiles}
         return render(request, self.template_name, context)
         

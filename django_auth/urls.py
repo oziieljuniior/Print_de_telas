@@ -25,6 +25,7 @@ urlpatterns = [
     path('home/', HomePageView.as_view(), name="home"),
     path("profile/", ProfileView.as_view(), name="profile"),
     path("register/", RegisterView.as_view(), name="register"),
+    path("logout/", views.LogoutView.as_view(), name = "logout"),
     path("login/", views.LoginView.as_view(), name = "login"),
     path("settings/", settings, name = "settings"),
     path('help/', help, name = 'help'),

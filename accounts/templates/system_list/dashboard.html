@@ -2,59 +2,56 @@
 
 {% extends 'base.html' %}
 {% block content %}
-<div class="columns">
-    <div class="column">
-        {% for posts in post %}
-            <div class="box">
-                {{ posts.body }}
-                <span class="is-small has-text-grey-light">
-                    ({{ posts.created_at }} by {{ pots.user.username }}
-                </span>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-9">
+            {% for post in posts %}
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="cartitle">{{ posts.title }}</h5>
+                        <p class="card-text">{{ posts.body }}</p>
+                        <p class="card-text"><small class="text-muted">Postado em {{ posts.created_at|date:"F j, Y" }} by {{ post.user }}</small></p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="col-md-3">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Meu Perfil</h5>
+                    <p class="card-text">{{ user.username }}</p>
+                    <a href="{% url 'System_Post:profile' request.user.profile.pk %}" class="btn btn-primary">Ver Perfil</a>
+                </div>
             </div>
-        {% endfor %}
-    </div>
-    <div class="column is-one-third">
-         <div class="block">
-            <a href="{% url 'System_Post:profile_list' %} ">
-                <button class="button is-dark is-outlined is-fullwidth">
-                    All Profiles
-                </button>
-            </a>
-        </div>
-    
-        <div class="block">
-            <a href="{% url 'System_Post:profile' request.user.profile.id %} ">
-                <button class="button is-success is-light is-outlined is-fullwidth">
-                    My Profile
-                </button>
-            </a>
-        </div>
-
-        <div class="block">
-            <a href="{% url 'System_Post:my_url' %}">
-                <button class="button is-dark is-outlined is-fullwidth">
-                    Aviator
-                </button>
-            </a>
-        </div>
-
-        <div class="block">
-            <h2 class="title is-2">Add a Post</p>
-            <form method="post">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <button class="button is-success is-fullwidth is-medium mt-5"
-                        type="submit">Post
-                </button>
-            </form>
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Adicionar um Post</h5>
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button class="btn btn-success btn-block" type="submit">Post</button>
+                    </form>
+                </div>
+            </div>
+            <div class="card mb-3">
+                <div class="card-boddy">
+                    <h5 class="card-title">Navigation</h5>
+                    <ul class="list-group">
+                        <li class="list-group-item"><a href="{% url 'System_Post:my_url' %}" Aviator</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card mb-3">
+                <div class="card-body">
+                    {% if user.is_authenticated %}
+                        <a href="{% url 'logout' %}" class="btn btn-outline-danger btn-block">Logout</a>
+                    {% else %}
+                        <a href="{% url 'login' %}" clar="btn btn-outline-primary btn-block">Login</a>
+                    {% endif %}
+                </div>
+            </div>
         </div>
     </div>
 </div>
-<div>
-    {% if user.is_authenticated %}
-        <a href="accounts/logout">Logout</a>
-    {% else %}
-        <a href="accounts/login">Login</a>
-    {% endif %}
-</div>
-{% endblock content %}
+{% endblock %}
+
