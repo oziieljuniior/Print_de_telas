@@ -4,21 +4,13 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.urls import reverse_lazy
 from django.views import View
-from django.views.decorators.http import require_http_methods
-from django.utils.decorators import method_decorator
-from django.db.models import Q 
 
 from django.views.generic import TemplateView, ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db import connection
 
-
-
-
 from .models import Profile, System_Post, Mymodel
 from .forms import SystemForm, UserRegisterForm
-
-
 
 
 POSTS_PER_PAGE = 10
@@ -123,7 +115,6 @@ class MyModelView(View):
         context = {'data': rows}
         return render(request, self.template_name, context)
     
-
 class HomePageView(TemplateView, LoginRequiredMixin):
     template_name = 'system_list/home.html'
     
