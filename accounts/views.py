@@ -135,7 +135,19 @@ class HomePageView(TemplateView, LoginRequiredMixin):
         else:
             return redirect(reverse_lazy('login'))
     
+
+class ProfileSearchView(ListView):
+    model = Profile
+    template_name = 'system_list/profile_search.html'
+    context_object_name = 'profiles'
+    paginate_by = POSTS_PER_PAGE
     
+    def get_queryset(self):
+        query = self.request.GET.get('q')
+        if query:
+            return Profile.objects.filter(user__username__icontains=query)
+        return Profile.objects.all()
+
 def settings(request):
     return render(request, 'system_list/settings.html')
 
