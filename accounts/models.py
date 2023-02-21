@@ -4,6 +4,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.utils import timezone
 
+
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name= 'profile')
     follows = models.ManyToManyField(
@@ -36,6 +37,7 @@ class System_Post(models.Model):
             f"({self.created_at:%Y-%m-%d %H:%M}): "
             f"{self.body[:30]}..."
         )
+
 
 class Mymodel(models.Model):
     id = models.AutoField(primary_key=True)

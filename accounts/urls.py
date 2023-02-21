@@ -12,4 +12,5 @@ urlpatterns = [
     path("profile/search", ProfileSearchView.as_view(), name="profile_search"),
     path("accounts/", include("django.contrib.auth.urls")),
     path("my-url/", MyModelView.as_view() , name = "my_url"),
+    
 ]

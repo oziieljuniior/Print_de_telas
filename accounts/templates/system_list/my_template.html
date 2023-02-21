@@ -1,47 +1,40 @@
 {% extends 'base.html' %}
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-{% block content %}
-<div class="container">
-    <table class="table" id="my-table">
-        <thead>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+<table>
+    <thread>
+        <tr>
+            <th> ID </th>
+            <th> Odd </th>
+            <th> Hora da Odd </th>
+            <th> Apostadores </th>
+        </tr>
+    </thread>
+    <tbody>
+        {% for row in my_table_data %}
             <tr>
-                <th> ID </th>
-                <th> Odd </th>
-                <th> Hora da Odd </th>
-                <th> Apostadores </th>
+                <td> {{ row.id }} </td>
+                <td> {{ row.od }} </td>
+                <td> {{ row.hora_criacao }} </td>
+                <td> {{ row.apostadores }} </td>
             </tr>
-        </thead>
-        <tbody>
-        </tbody>
-    </table>
-</div>
-{% endblock %}
+        {% endfor %}
+    </tbody>
+</table>
 
-{% block javascript %}
-    <script>
-        function loadTableData() {
-            $ajax({
+<script>
+    $(document).ready(function() {
+        setInterval(function() {
+            $.ajax({
+                url: "{% url 'System_Post:my_url' %}",
                 type: "GET",
-                url: 'System_Post:my_url',
-                success: function(data) {
-                    $("#my-table tbody").empty();
-
-                    for (var i = data.length - 1; i >= 0; i--) {
-                    var row = data[i];
-                        var $row = $("<tr></tr>");
-                        $("<td></td>").text(row.id).appendTo($row);
-                        $("<td></td>").text(row.odd).appendTo($row);
-                        $("<td></td>").text(row.hora_criacao).appendTo($row);
-                        $("<td></td>").text(row.apostadores).appendTo($row);
-                        $row.prependTo("#my-table tbody");
-                    } 
+                dataType: "html",
+                success: function(data){
+                    $("#my-table").html(data);
                 }
             });
-        }
-
-        loadTableData();
-        setInterval(loadTableData, 3000);
-
-        console.log('LoadTableData() foi chamada pelo setInterval!');
-    </script>
-{% endblock %}
+        }, 3000);
+    });
+        
+</script>
