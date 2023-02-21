@@ -21,32 +21,23 @@
 
 {% block javascript %}
     <script>
-        function loadTableData(){
-            $.get("{% url 'my_url' %}", function(data){
-                if (data && Array.isArray(data)){
-                    $("#my-table tbody").empty();
-
-                    $.each(data, function(index,row)){
-                        var $row = $("<tr></tr>");
-                        $("<td></td>").text(row.id).appendTo($row);
-                        $("<td></td>").text(row.odd).appendTo($row);
-                        $("<td></td>").text(row.hora_criacao).appendTo($row);
-                        $("<td></td>").text(row.apostadores).appendTo($row);
-                        $row.appendTo("#my-table tbody");
-                    });
-                } else {
-                    console.error("Data is invalid or not an array");
+        function loadTableData() {
+            $.get("{% url 'my_url' %}", function (data) {
+                $("#my-table tbody").empty();
+                for (var i = data.length - 1; i >= 0; i--) {
+                    var row = data[i];
+                    var $row = $("<tr></tr>");
+                    $("<td></td>").text(row.id).appendTo($row);
+                    $("<td></td>").text(row.odd).appendTo($row);
+                    $("<td></td>").text(row.hora_criacao).appendTo($row);
+                    $("<td></td>").text(row.apostadores).appendTo($row);
+                    $row.appendTo("#my-table tbody");
                 }
-                
-            }).fail(function(){
-                console.error("Failed to load data");
             });
         }
 
         loadTableData();
-        setInterval(function(){
-            loadTableData();
-        }, 3000);
+        setInterval(loadTableData,3000);
         console.log('LoadTableData() foi chamada pelo setInterval!');
     </script>
 {% endblock %}
