@@ -24,20 +24,22 @@
         function loadTableData() {
             $.get("{% url 'my_url' %}", function (data) {
                 $("#my-table tbody").empty();
+
                 for (var i = data.length - 1; i >= 0; i--) {
-                    var row = data[i];
-                    var $row = $("<tr></tr>");
-                    $("<td></td>").text(row.id).appendTo($row);
-                    $("<td></td>").text(row.odd).appendTo($row);
-                    $("<td></td>").text(row.hora_criacao).appendTo($row);
-                    $("<td></td>").text(row.apostadores).appendTo($row);
-                    $row.appendTo("#my-table tbody");
+                var row = data[i];
+                var $row = $("<tr></tr>");
+                $("<td></td>").text(row.id).appendTo($row);
+                $("<td></td>").text(row.odd).appendTo($row);
+                $("<td></td>").text(row.hora_criacao).appendTo($row);
+                $("<td></td>").text(row.apostadores).appendTo($row);
+                $row.prependTo("#my-table tbody");
                 }
             });
-        }
+            }
 
         loadTableData();
-        setInterval(loadTableData,3000);
+        setInterval(loadTableData, 3000);
+
         console.log('LoadTableData() foi chamada pelo setInterval!');
     </script>
 {% endblock %}
