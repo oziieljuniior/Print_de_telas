@@ -40,7 +40,7 @@ class DashboardView(View):
     
     @method_decorator(require_http_methods(["POST"]))
     def post(self, request):
-        form = SystemForm(request.POST or None)
+        form = SystemForm(request.POST)
         if form.is_valid():
             system = form.save(commit=False)
             system.user = request.user
