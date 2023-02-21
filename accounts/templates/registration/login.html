@@ -12,33 +12,34 @@
             <form method="post">
                 {% csrf_token %}
                 <div class="form-group">
-                    {{form.username.label_tag}}
-                    {{form.username}}
+                    {{ form.username.label_tag }}
+                    {{ form.username }}
                 </div>
                 <div class="form-group">
-                    {{form.password.label_tag}}
-                    {{form.password}}
+                    {{ form.password.label_tag }}
+                    {{ form.password }}
                 </div>
-                <button type="submit" class="btn btn-primary btn-block">Login</butto>
+                <button type="submit" class="btn btn-primary btn-block">Login</button>
             </form>
             <div class="text-center mt-3">
-                <a href="{% url 'password_reset' %}">Forgot your password?</a>
+                <a href="{% url 'password_reset' %}">Esqueceu a senha?</a>
             </div>
             <div class="text-center mt-3">
                 <a href="{% url 'register' %}">Não tem conta? Registre-se</a>
             </div>
 
             {% if form.errors %}
-            <div class="alert alert-danger mt-3">
-                {% for filed, erros in form.errors.items %}
-                <strong>{{ field|title }}:</strong>
-                {% for error in errors %}
-                {{ error }}
-                {% endfor %}
-                {% endfor %}
-            </div>
+                <div class="alert alert-danger mt-6">
+                    {% for filed, erros in form.errors.items %}
+                        <strong>{{ field|title }}:</strong>
+                        {% for error in errors %}
+                            {{ error }}
+                        {% endfor %}
+                    {% endfor %}
+                </div>
             {% endif %}
         </div>
     </div>
+</div>
 {% endblock %}
     

@@ -4,8 +4,18 @@
 {% block content %}
 <div class="container mt-5">
     <div class="row">
+        <div class="card mb-9">
+            <div class="card-body">
+                <h5 class="card-title">Adicionar um Post</h5>
+                <form method="post" action="{% url 'System_Post:dashboard' %}">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button class="btn btn-success btn-block" type="submit">Post</button>
+                </form>
+            </div>
+        </div>
         <div class="col-md-9">
-            {% for post in posts %}
+            {% for post in post %}
                 <div class="card mb-3">
                     <div class="card-body">
                         <h5 class="cartitle">{{ post.title }}</h5>
@@ -21,16 +31,6 @@
                     <h5 class="card-title">Meu Perfil</h5>
                     <p class="card-text">{{ user.username }}</p>
                     <a href="{% url 'System_Post:profile' request.user.profile.pk %}" class="btn btn-primary">Ver Perfil</a>
-                </div>
-            </div>
-            <div class="card mb-3">
-                <div class="card-body">
-                    <h5 class="card-title">Adicionar um Post</h5>
-                    <form method="post" action="{% url 'System_Post:dashboard' %}">
-                        {% csrf_token %}
-                        {{ form.as_p }}
-                        <button class="btn btn-success btn-block" type="submit">Post</button>
-                    </form>
                 </div>
             </div>
             <div class="card mb-3">

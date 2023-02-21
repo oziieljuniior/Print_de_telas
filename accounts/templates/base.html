@@ -19,18 +19,20 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link-active" aria-current="page" href="{% url 'System_Post:dashboard' %}">Home</a>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'profile' %}">Profile</a>
-                    </li>
-                </ul>
-                <form class="d-flex" method="GET" action="{% url 'System_Post:profile_search' %}">
-                    <input class="form-control me-2" type="search" placeholder="Search profile" aria-label="Search" name="q">
-                    <button class="btn btn-outiline-success" type="submit">Procurar</button>
-                </form>
+                
+    
                 {% if user.is_authenticated %}
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link-active" aria-current="page" href="{% url 'System_Post:dashboard' %}">Home</a>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'profile' %}">Profile</a>
+                        </li>
+                    </ul>
+                    <form class="d-flex" method="GET" action="{% url 'System_Post:profile_search' %}">
+                        <input class="form-control me-2" type="search" placeholder="Search profile" aria-label="Search" name="q">
+                        <button class="btn btn-outiline-success" type="submit">Procurar</button>
+                    </form>
                     <ul class="navbar-nav">
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'System_Post:profile' request.user.profile.pk %}"{{ user.username }}</a>
@@ -50,9 +52,6 @@
                     </ul>
                 {% else %}
                     <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'login' %}">Login</a>
-                        </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'register' %}">Registre-se</a>
                         </li>

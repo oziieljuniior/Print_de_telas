@@ -23,7 +23,7 @@ from .forms import SystemForm, UserRegisterForm
 
 POSTS_PER_PAGE = 10
 
-@method_decorator(require_http_methods(["GET"]), name = 'dispatch')
+#@method_decorator(require_http_methods(["GET"]), name = 'dispatch')
 class DashboardView(View):
     template_name = 'system_list/dashboard.html'
     login_url = reverse_lazy('login')
@@ -31,15 +31,15 @@ class DashboardView(View):
     def get(self, request):
         if request.user.is_authenticated:
             form = SystemForm()
-            followed_pots = System_Post.objects.filter(user__profile__in=request.user.profile.follows.all()).order_by(
-                "-created_at")
+            followed_pots = System_Post.objects.filter(user__profile__in=request.user.profile.follows.all()).order_by("-created_at")
             return render(request, self.template_name, {'form': form, 'post': followed_pots})
         else:
             return redirect(self.login_url)
     
     
-    @method_decorator(require_http_methods(["POST"]))
+    #@method_decorator(require_http_methods(["POST"]))
     def post(self, request):
+        print(request.method)
         form = SystemForm(request.POST)
         if form.is_valid():
             system = form.save(commit=False)
