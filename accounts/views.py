@@ -115,9 +115,6 @@ class MyModelView(View):
         context = {'data': rows}
         return render(request, self.template_name, context)
 
-    def my_table_view(self, request):
-        my_table_data = Mymodel.objects.all()
-        return(request, self.template_name ,{'my_table_data': my_table_data})
 
 class HomePageView(TemplateView, LoginRequiredMixin):
     template_name = 'system_list/home.html'

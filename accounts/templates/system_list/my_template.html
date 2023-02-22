@@ -2,27 +2,29 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
-<table>
-    <thread>
-        <tr>
-            <th> ID </th>
-            <th> Odd </th>
-            <th> Hora da Odd </th>
-            <th> Apostadores </th>
-        </tr>
-    </thread>
-    <tbody>
-        {% for row in my_table_data %}
+{% block content %}
+    <h1> Tabela Principal </h1>
+    <table>
+        <thread>
             <tr>
-                <td> {{ row.id }} </td>
-                <td> {{ row.od }} </td>
-                <td> {{ row.hora_criacao }} </td>
-                <td> {{ row.apostadores }} </td>
+                <th> ID </th>
+                <th> Odd </th>
+                <th> Hora da Odd </th>
+                <th> Apostadores </th>
             </tr>
-        {% endfor %}
-    </tbody>
-</table>
-
+        </thread>
+        <tbody>
+            {% for row in row %}
+                <tr>
+                    <td> {{ row.0 }} </td>
+                    <td> {{ row.1 }} </td>
+                    <td> {{ row.2 }} </td>
+                    <td> {{ row.3 }} </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock content %}
 <script>
     $(document).ready(function() {
         setInterval(function() {
