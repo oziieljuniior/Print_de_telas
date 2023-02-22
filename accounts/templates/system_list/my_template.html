@@ -1,43 +1,42 @@
 {% extends 'base.html' %}
 {% load static %}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock %}
+
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
 {% block content %}
     <h1> Tabela Principal </h1>
-    <table id="my-table">
-        <thread>
-            <tr>
-                <th> ID </th>
-                <th> Odd </th>
-                <th> Hora da Odd </th>
-                <th> Apostadores </th>
-            </tr>
-        </thread>
-        <tbody>
-            {% for row in data %}
+    <div class="container" id="table-container">
+        <table class="table" id="my-table">
+            <thread>
                 <tr>
-                    <td class-"my-cell"> {{ row.0 }} </td>
-                    <td class-"my-cell"> {{ row.1 }} </td>
-                    <td class-"my-cell"> {{ row.2 }} </td>
-                    <td class-"my-cell"> {{ row.3 }} </td>
+                    <th> ID </th>
+                    <th> Odd </th>
+                    <th> Hora da Odd </th>
+                    <th> Apostadores </th>
                 </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+            </thread>
+            <tbody id="table-body">
+                {% for row in data reversed %}
+                    <tr>
+                        <td class="my-cell"> {{ row.0 }} </td>
+                        <td class="my-cell"> {{ row.1 }} </td>
+                        <td class="my-cell"> {{ row.2 }} </td>
+                        <td class="my-cell"> {{ row.3 }} </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endblock content %}
 <script>
     $(document).ready(function() {
         setInterval(function() {
-            $.ajax({
-                url: "{% url 'System_Post:my_url' %}",
-                type: "GET",
-                dataType: "html",
-                success: function(data){
-                    $("#my-table").html(data);
-                }
-            });
+            $("#table-container").load("{% url 'System_Post:my_url' %}");
         }, 3000);
     });
-        
 </script>
