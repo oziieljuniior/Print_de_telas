@@ -2,7 +2,6 @@ from django import forms
 from .models import System_Post
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
 class SystemForm(forms.ModelForm):
@@ -26,23 +25,32 @@ class SystemForm(forms.ModelForm):
     
             
 class UserRegisterForm(forms.ModelForm):
-    first_name = forms.CharField(label='None',max_length=150,)
-    last_name = forms.CharField(label="Sobrenome",max_length=150,)
+    first_name = forms.CharField(label='None',max_length=15)
+    last_name = forms.CharField(label="Sobrenome",max_length=15)
     email = forms.EmailField(label='E-mail',)
+    username = forms.CharField(label='Username', max_length=15)
+    password1 = forms.CharField(label='Senha', widget=forms.PasswordInput)
+    password2 = forms.CharField(label='Confirme a senha', widget=forms.PasswordInput)
+    
     
     class Meta:
         model = User
-        fields = ('first_name', 'last_name','email',)
+        fields = ('first_name', 'last_name','email','username','password1','password2')
     
     error_messages = {'invalid_first_character': _('O primeiro caractere deve ser uma letra'),}
     
     def clean(self):
         cleaned_data = super().clean()
-        first_name = self.data.get('first_name')
-        last_name = cleaned_data['last_name']
+        first_name = self.cleaned_data.get('first_name')
+        last_name = self.cleaned_data.get('last_name')
+        password1 = self.cleaned_data.get('password1')
+        password2 = self.cleaned_data.get('password2')
         
         if first_name == last_name:
             raise ValidationError(_('Nome e sobrenome não podem ser iguais.'))
+        
+        if password1 != password2:
+            raise ValidationError(_('As senhas devem ser iguais!'))
         
         #return self.cleaned_data
     
