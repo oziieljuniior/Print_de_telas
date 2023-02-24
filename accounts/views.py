@@ -5,6 +5,8 @@ from django.contrib import messages
 from django.urls import reverse_lazy
 from django.views import View
 
+from django.contrib.auth.views import PasswordResetView
+
 from django.views.generic import TemplateView, ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db import connection
@@ -139,6 +141,15 @@ class ProfileSearchView(ListView):
         if query:
             return Profile.objects.filter(user__username__icontains=query)
         return Profile.objects.all()
+    
+class MypasswordResert(PasswordResetView):
+    '''
+    requer
+    registration/password_reset_form.html
+    registration/password_reset_email.html
+    registration/password_reset_subject.txt
+    '''
+    ...
 
 def settings(request):
     return render(request, 'system_list/settings.html')
@@ -156,3 +167,4 @@ def contact(request):
 
 def sobre_nos(request):
     return render(request, 'registration/sobre_nos.html')
+
