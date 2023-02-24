@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block head %}
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'static/css/style.css' %}">
 {% endblock %}
 
 
@@ -34,9 +34,23 @@
     </div>
 {% endblock content %}
 <script>
-    $(document).ready(function() {
-        setInterval(function() {
-            $("#table-container").load("{% url 'System_Post:my_url' %}");
-        }, 3000);
-    });
+    function updateTable() {
+        axios.get("{% url 'Syste_Post:my_url' %}")
+            .then(response => { 
+                const tableBody = document.getElementById('table-body');
+                tableBody.innerHTML = '';
+                for (const row of response.data){
+                    const newRow = document.createElement('tr');
+                    newRow.innerHTML = '<td class="my-cell">${row[0]}</td><td class="my-cell">${row[1]}</td><td class="my-cell">${row[2]}</td><td class="my-cell">${row[3]}</td>';
+                    tableBody.appendChild(newRow);
+                }
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    }
+
+    const interval = 3000;
+
+    setInterval(updateTable, interval);
 </script>
