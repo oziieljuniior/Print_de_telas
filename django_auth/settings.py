@@ -133,16 +133,16 @@ LOGOUT_REDIRECT_URL = "/accounts/login"
 
 #Email settings
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'your_email_host'
-EMAIL_PORT = 'your_email_port'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
-EMAIL_HOST_USER = 'your_email_address' #adicione seu email aqui
-EMAIL_HOST_PASSWORD = 'your_email_password' #Adicione sua senha aqui
+EMAIL_HOST_USER = 'ozieljr14@gmail.com' #adicione seu email aqui
+EMAIL_HOST_PASSWORD = 'oz14072849?A' #Adicione sua senha aqui
 
 #Password reset settings
-EMAIL_FROM_ADDRESS = 'seu-email@gmail.com'
-EMAIL_SUBJECT_PREFIX = '[System Post]'
+#EMAIL_FROM_ADDRESS = 'oziel.contato@proton.me'
+#EMAIL_SUBJECT_PREFIX = '[System Post]'
 
 #Ajuste os links de acordo com a URL do projeto
 #LOGIN_REDIRECT_URL = '/'
