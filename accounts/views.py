@@ -153,3 +153,6 @@ def faq(request):
 
 def contact(request):
     return render(request, 'help/contact.html')
+
+def sobre_nos(request):
+    return render(request, 'registration/sobre_nos.html')
