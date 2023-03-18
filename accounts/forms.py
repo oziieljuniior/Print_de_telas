@@ -49,6 +49,7 @@ class UserRegisterForm(UserCreationForm, forms.ModelForm):
             field.widget.attrs.update({'placeholder': field.label})
     
     def clean(self):
+        cleaned_data = super().clean()
         first_name = self.cleaned_data.get('first_name')
         last_name = self.cleaned_data.get('last_name')
         password1 = self.cleaned_data.get('password1')
@@ -59,6 +60,9 @@ class UserRegisterForm(UserCreationForm, forms.ModelForm):
         
         if password1 != password2:
             raise ValidationError(_('As senhas devem ser iguais!'))
+        
+        #chama todas as validações do campo
+        return cleaned_data
         
     def clean_password(self):
         password1 = self.cleaned_data.get('password1')
@@ -101,6 +105,7 @@ class UserRegisterForm(UserCreationForm, forms.ModelForm):
         return email
     
     def save(self, commit=True):
+        #Usa self.instance para atualizar o objeto existente
         user = super().save(commit=False)
         user.email = self.cleaned_data['email']
         user.first_name = self.cleaned_data['first_name']

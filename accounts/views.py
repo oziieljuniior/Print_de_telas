@@ -2,10 +2,8 @@
 
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
-from django.urls import reverse_lazy
 from django.views import View
 
-from django.contrib.auth.views import PasswordResetView
 
 from django.views.generic import TemplateView, ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -13,6 +11,13 @@ from django.db import connection
 
 from .models import Profile, System_Post, Mymodel
 from .forms import SystemForm, UserRegisterForm
+
+from django.core.mail import send_mail
+from django.urls import reverse_lazy
+from django.contrib.auth.views import PasswordResetView
+from django.contrib.auth.models import User
+
+
 
 
 POSTS_PER_PAGE = 10
@@ -144,13 +149,28 @@ class ProfileSearchView(ListView):
     
 class MypasswordResert(PasswordResetView):
     '''
-    requer
-    registration/password_reset_form.html
-    registration/password_reset_email.html
-    registration/password_reset_subject.txt
+    Classe para resetar senha do usuario
     '''
-    ...
-
+    
+    template_name = 'registration/password_reset_form.html'
+    email_template_name = 'registration/password_reset_email.html'
+    subject_template_name = 'registration/password_reset_subject.txt'
+    success_url = reverse_lazy('password_reset_done')
+    
+    def form_valid(self, form):
+        #Pegar email
+        email = form.cleaned_data['email']
+        
+        #checar se o email existe no sistema
+        if User.objects.filter(email=email).exists():
+            response = super().form_valid(form)
+            
+            send_mail('Password Reset Requested', 'Por Favor clique no link abaixo para resetar sua senha', 'oziel.contato@proton.me', [email], fail_silently=False,)
+            return response
+        
+        form.add_error('email','O email fornecido não existe no sistema.')
+        return super().form_invalid(form)
+    
 def settings(request):
     return render(request, 'system_list/settings.html')
 
