@@ -4,7 +4,7 @@ pyscreenshot
 mouse
 pynput
 opencv-python
-pytesseract       #lembrar de instalar executavel ocr - windos/linux
+pytesseract       #lembrar de instalar executavel ocr - windows/linux
 matplotlib
 openpyxl
 pandas
