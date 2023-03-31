@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'static/css/style.css' %}">
+{% endblock %}
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+{% block content %}
+    <h1> Tabela Principal </h1>
+    <div class="container" id="table-container">
+        <table class="table" id="my-table">
+            <thread>
+                <tr>
+                    <th> ID </th>
+                    <th> Odd </th>
+                    <th> Hora da Odd </th>
+                    <th> Apostadores </th>
+                </tr>
+            </thread>
+            <tbody id="table-body">
+                {% for row in data reversed %}
+                    <tr>
+                        <td class="my-cell"> {{ row.0 }} </td>
+                        <td class="my-cell"> {{ row.1 }} </td>
+                        <td class="my-cell"> {{ row.2 }} </td>
+                        <td class="my-cell"> {{ row.3 }} </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock content %}
+<script>
+    function updateTable() {
+        axios.get("{% url 'Syste_Post:my_url' %}")
+            .then(response => { 
+                const tableBody = document.getElementById('table-body');
+                tableBody.innerHTML = '';
+                for (const row of response.data){
+                    const newRow = document.createElement('tr');
+                    newRow.innerHTML = '<td class="my-cell">${row[0]}</td><td class="my-cell">${row[1]}</td><td class="my-cell">${row[2]}</td><td class="my-cell">${row[3]}</td>';
+                    tableBody.appendChild(newRow);
+                }
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    }
+
+    const interval = 3000;
+
+    setInterval(updateTable, interval);
+</script>

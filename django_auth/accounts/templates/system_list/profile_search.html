@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1 Search results for "{{ request.GET.q }}"</h1>
+    
+    {% if profiles %}
+        <div class="row">
+            {% for profile in profiles %}
+                <div class="col-md-4">
+                    <div class="card mb-4 box-shadow">
+                        <div class="card-body">
+                            <p class="card-text">{{ profile.user.username }}</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <a href="{% url 'System-Post:profile' profile.pk %}" class="btn btn-sm btn-outline-secondary">View</a>
+                                </div>
+                                <small class="text-muted">{{ profile.created_at|date }}</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        {% include 'pagination.html' %}
+    {% else %}
+        <p> Perfil não encontrado.</p>
+    {% endif %}
+{% endblock content %}

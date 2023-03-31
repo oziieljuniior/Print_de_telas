@@ -52,3 +52,30 @@ Adicionar suporte para vários idiomas para tornar a plataforma acessível a usu
 Melhorar a interface do usuário para torná-la mais atraente e fácil de usar.
 
 Implementar recursos de privacidade para permitir que os usuários controlem quem pode ver e interagir com suas postagens e informações de perfil.
+
+*-*-*-*-*-*-*-*-*-*
+31/03/23 - Atualização dos objetivos do projeto 
+divisão do projeto:
+
+Etapa de Autenticação:
+
+Implementar sistema de cadastro de usuários
+Implementar sistema de login
+Implementar sistema de redefinição de senha
+Implementar sistema de logout
+Implementar sistema de autenticação para páginas restritas
+Etapa de Rede Social:
+
+Implementar sistema de postagem de textos
+Implementar sistema de curtidas e compartilhamento de postagens
+Implementar sistema de respostas em postagens
+Implementar página de perfil pessoal
+Implementar sistema de bate-papo
+Implementar sistema de comunidades
+Etapa de Estatísticas de Jogos:
+
+Implementar o backend das estatísticas
+Criar páginas para visualização das estatísticas
+Lembre-se de que essas etapas são apenas sugestões e podem ser adaptadas de acordo com as necessidades e prioridades do projeto. Para cada etapa, 
+você pode dividir em tarefas menores e priorizá-las para garantir que o projeto seja desenvolvido de forma organizada e escalável. Além disso, 
+é importante ter em mente a usabilidade e a experiência do usuário em todas as etapas do projeto.

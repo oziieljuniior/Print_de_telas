@@ -1,0 +1,46 @@
+<!-- django_auth/accounts/templates/system_list/dashboard.html -->
+
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="card mb-9">
+            <div class="card-body">
+                <h5 class="card-title">Adicionar um Post</h5>
+                <form method="post" action="{% url 'System-Post:dashboard' %}">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button class="btn btn-success btn-block" type="submit">Post</button>
+                </form>
+            </div>
+        </div>
+        <div class="col-md-9">
+            {% for post in post %}
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="cartitle">{{ post.title }}</h5>
+                        <p class="card-text">{{ post.body }}</p>
+                        <p class="card-text"><small class="text-muted">Postado em {{ post.created_at|date:"F j, Y" }} by {{ post.user }}</small></p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="col-md-3">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Meu Perfil</h5>
+                    <p class="card-text">{{ user.username }}</p>
+                    <a href="{% url 'System-Post:profile' request.user.profile.pk %}" class="btn btn-primary">Ver Perfil</a>
+                </div>
+            </div>
+            <div class="card mb-3">
+                <div class="card-boddy">
+                    <h5 class="card-title">Navigation</h5>
+                    <a href="{% url 'System-Post:my_url' %}" class="btn btn-primary">Navigation</a>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
