@@ -9,6 +9,7 @@ de forma fiel e com isso debater sobre melhores maneiras de estar realizando apo
                                 como criação de perfil, mensagens, compartilhamento de conteúdo, feed de notícias, busca de usuários, entre outras.
 + Reposta: Sistema de login - Cadastro, Recuperação de senha, Login
 * Futuro: Ao finalizar a implementação do projeto e disponibiliza-lo em um dominio de url, realizar o ajuste de politica de
+	*- Sistem de login - Cadastro ok, 
 	privacidade do meu site.
 	links:
 	/ https://www.freeprivacypolicy.com/free-privacy-policy-generator/
@@ -28,3 +29,26 @@ de forma fiel e com isso debater sobre melhores maneiras de estar realizando apo
 - Analisar e ajustar: Analise regularmente o desempenho da rede social e ajuste-a de acordo com as necessidades
 		      e feedback dos usuários. Isso pode ajudar a melhorar a experiência do usuário e manter 
 		      a rede social relevante e interessante.
+
+/ FUTURO
+Alguns pontos que podem ser melhorados no projeto apresentado são:
+
+Adicionar validação de formulário no registro de usuário, para garantir que as informações fornecidas pelos usuários são válidas e seguras.
+
+Implementar autenticação de dois fatores (2FA) para melhorar a segurança do login dos usuários.
+
+Adicionar um sistema de moderação para gerenciar e remover postagens inapropriadas.
+
+Implementar um sistema de notificações para alertar os usuários sobre novas postagens ou atualizações relevantes.
+
+Adicionar suporte para compartilhamento de arquivos e imagens.
+
+Melhorar a eficiência do código, por exemplo, usando consultas de banco de dados mais otimizadas e cache para reduzir o tempo de carregamento da página.
+
+Implementar recursos de análise e visualização de dados para mostrar estatísticas e insights sobre as postagens e atividades dos usuários.
+
+Adicionar suporte para vários idiomas para tornar a plataforma acessível a usuários de diferentes países e regiões.
+
+Melhorar a interface do usuário para torná-la mais atraente e fácil de usar.
+
+Implementar recursos de privacidade para permitir que os usuários controlem quem pode ver e interagir com suas postagens e informações de perfil.

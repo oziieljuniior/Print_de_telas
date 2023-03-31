@@ -151,6 +151,7 @@ class MypasswordResert(PasswordResetView):
     '''
     Classe para resetar senha do usuario
     '''
+<<<<<<< Updated upstream
     
     template_name = 'registration/password_reset_form.html'
     email_template_name = 'registration/password_reset_email.html'
@@ -171,6 +172,9 @@ class MypasswordResert(PasswordResetView):
         form.add_error('email','O email fornecido não existe no sistema.')
         return super().form_invalid(form)
     
+=======
+
+>>>>>>> Stashed changes
 def settings(request):
     return render(request, 'system_list/settings.html')
 
