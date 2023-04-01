@@ -2,13 +2,14 @@
 
 {% block content  %}
     <div class="jumbotron">
-        <h1 class="display-4">Bem-Vindo ao System Post!</h1>
-        <p class="lead">Este é um site de postagens que visa oferecer um ambiente seguro e acolhedor para todos os seus usurários.</p>
+        <h1 class="display-4">Bem-Vindo ao AtConnect!</h1>
+        <p class="lead">Este é um site de postagens que visa oferecer um ambiente seguro e acolhedor para todos os seus usurários. A rede social que conecta pessoas, projetos e ideias para mudar o mundo.</p>
         <hr class="my-4">
+        <p> Experimente agora mesmo! Crie sua conta e comece a conectar com pessoas que pensam como você.</p>
         <p>Faça o login ou cadastre-se para começar a usar o sistema</p>
         <p class="lead">
-            <a class="btn btn-primary btn-lg" href="{% url 'login' %}" role="button">Fazer Login</a>
-            <a class="btn btn-primary btn-lg" href="{% url 'register' %}" role="button">Fazer Cadastro</a>
+            <a class="btn btn-primary btn-lg" href="{% url 'accounts:login' %}" role="button">Fazer Login</a>
+            <a class="btn btn-primary btn-lg" href="{% url 'accounts:signup' %}" role="button">Fazer Cadastro</a>
         </p>
     </div>
     
