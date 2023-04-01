@@ -6,6 +6,13 @@ from django.dispatch import receiver
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name= 'profile')
+    first_name = models.CharField(max_length=30, blank=True)
+    last_name = models.CharField(max_length=30, blank=True)
+    email = models.EmailField(blank=True)
+    avatar = models.ImageField(upload_to='avatars/', blank=True, null=True)
+    bio = models.TextField(max_length=500, blank=True, null=True)
+    birth_date = models.DateField(blank=True, null=True)
+    location = models.CharField(max_length=30, blank=True, null=True)
     follows = models.ManyToManyField(
         "self",
         related_name="followed_by",
