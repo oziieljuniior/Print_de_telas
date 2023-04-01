@@ -1,18 +1,11 @@
 from django.urls import path
+from .views import SignUpView
+from django.contrib.auth.views import LoginView, LogoutView
 
-from .views import DashboardView, ProfileListView, ProfileView, MyModelView, HomePageView, settings, ProfileSearchView, PasswordResetView
-from django.conf.urls import include
-
-app_name = "System-Post"
+app_name = "accounts"
 
 urlpatterns = [
-    path("", DashboardView.as_view() , name = "dashboard"),
-    path("settings/", settings, name = "settings"),
-    path("profile-list/", ProfileListView.as_view(), name="profile_list"),
-    path("profile/<int:pk>/", ProfileView.as_view(), name="profile"),
-    path("profile/search/", ProfileSearchView.as_view(), name="profile_search"),
-    path("accounts/", include("django.contrib.auth.urls"), name='accounts'),
-    path('reset-password/', PasswordResetView.as_view(), name = "password_reset"),
-    path("my-url/", MyModelView.as_view() , name = "my_url"),
-    
+    path('login/', LoginView.as_view(template_name='accounts/login.html'), name = 'login'),
+    path('logout/', LogoutView.as_view(), name='logout'),
+    path('signup/', SignUpView.as_view(), name='signup'),
 ]
