@@ -1,0 +1,75 @@
+.login-page {
+    background-image: url("{% static 'atconnect/static/img/telafundo.jpg' %}");
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .form {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+  }
+  
+  .form h1 {
+    font-size: 32px;
+    margin-bottom: 30px;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+    text-align: left;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+  }
+  
+  .form-group input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    box-shadow: none;
+    background-color: #f4f4f4;
+    color: #333;
+    font-size: 16px;
+  }
+  
+  .btn-primary {
+    background-color: #007bff;
+    border: none;
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 20px;
+    font-size: 16px;
+    color: #fff;
+    cursor: pointer;
+  }
+  
+  .btn-primary:hover {
+    background-color: #0069d9;
+  }
+  
+  .text-center {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+  }
+  
+  .text-center a {
+    color: #007bff;
+  }
+  
+  .text-center a:hover {
+    text-decoration: none;
+  }
