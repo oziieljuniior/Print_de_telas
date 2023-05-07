@@ -1,5 +1,5 @@
 .login-page {
-    background-image: url("{% static 'atconnect/static/img/telafundo.jpg' %}");
+    background-image: url("{% static 'atconnect/img/telafundo.jpg' %}");
     background-size: cover;
     background-position: center;
     height: 100vh;
