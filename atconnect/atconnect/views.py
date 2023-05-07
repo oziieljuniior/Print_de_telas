@@ -8,7 +8,7 @@ from .forms import SystemForm, ProfileForm
 from .models import System_Post, Profile
 from datetime import datetime
 from django.views.generic import ListView
-
+from django.db import connection
 
 
 # Create your views here.
@@ -68,3 +68,12 @@ class ProfileSearchVIew(ListView):
         if query:
             return Profile.objects.filter(user__username__icontains=query)
         return Profile.objects.all()
+    
+class MyModelView(View):
+    template_name = 'atconnect/my_tamplate.html'
+    def get(self, request):
+        with connection.cursor() as cursor:
+            cursor.execute("SELECT * FROM odds")
+            rows = cursor.fetchall()
+        context = {'data': rows}
+        return render(request, self.template_name, context)

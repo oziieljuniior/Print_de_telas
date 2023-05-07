@@ -36,13 +36,13 @@
                             <a class="nav-link" href="{% url 'logout' %}">Logout</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'settings' %}">Settings</a>
+                            <a class="nav-link" href="{% url 'accounts:settings' %}">Settings</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'help' %}">Help</a>
+                            <a class="nav-link" href="{% url 'accounts:help' %}">Help</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'contact' %}">Contact</a>
+                            <a class="nav-link" href="{% url 'accounts:contact' %}">Contact</a>
                         </li>
                     </ul>
                 {% else %}

@@ -40,3 +40,12 @@ class PasswordResetConfirmView(auth_views.PasswordResetConfirmView):
 
 class PasswordResetCompleteView(auth_views.PasswordResetCompleteView):
     template_name = 'atconnect/password_reset_complete.html'
+    
+def settings(request):
+    return render(request, 'help/settings.html')
+
+def help(request):
+    return render(request, 'help/help.html')
+
+def contact(request):
+    return render(request, 'help/contact.html')

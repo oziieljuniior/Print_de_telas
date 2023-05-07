@@ -7,7 +7,7 @@
         <div class="card mb-9">
             <div class="card-body">
                 <h5 class="card-title">Adicionar um Post</h5>
-                <form method="post" action="{% url 'System-Post:dashboard' %}">
+                <form method="post" action="{% url 'atconnect:dashboard' %}">
                     {% csrf_token %}
                     {{ form.as_p }}
                     <button class="btn btn-success btn-block" type="submit">Post</button>
@@ -30,13 +30,13 @@
                 <div class="card-body">
                     <h5 class="card-title">Meu Perfil</h5>
                     <p class="card-text">{{ user.username }}</p>
-                    <a href="{% url 'System-Post:profile' request.user.profile.pk %}" class="btn btn-primary">Ver Perfil</a>
+                    <a href="{% url 'atconnect:profile' request.user.profile.pk %}" class="btn btn-primary">Ver Perfil</a>
                 </div>
             </div>
             <div class="card mb-3">
                 <div class="card-boddy">
                     <h5 class="card-title">Navigation</h5>
-                    <a href="{% url 'System-Post:my_url' %}" class="btn btn-primary">Navigation</a>
+                    <a href="{% url 'atconnect:my-url' %}" class="btn btn-primary">Navigation</a>
                     </ul>
                 </div>
             </div>
