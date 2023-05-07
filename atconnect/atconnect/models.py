@@ -29,6 +29,7 @@ def create_profile(sender, instance, created, **kwargs):
         user_profile.save()
         user_profile.follows.add(instance.profile)
         user_profile.save()
+
 class System_Post(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_system_post')
     body = models.CharField(max_length=140)

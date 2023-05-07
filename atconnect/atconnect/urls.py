@@ -1,9 +1,9 @@
 from django.urls import path
-from .views import DashboardView, ProfileView
+from .views import DashboardView, ProfileView, ProfileSearchVIew
 
 app_name = 'atconnect'
 
 urlpatterns = [
-    path('', DashboardView.as_view(), name='dashboard'),
     path('profile/<int:pk>/', ProfileView, name='profile'),
+    path('profile/search/', ProfileSearchVIew.as_view(), name = 'profile_search'),
 ]

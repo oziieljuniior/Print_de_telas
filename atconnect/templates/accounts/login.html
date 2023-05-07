@@ -22,10 +22,10 @@
                 <button type="submit" class="btn btn-primary btn-block">Login</button>
             </form>
             <div class="text-center mt-3">
-                <a href="{% url 'System-Post:password_reset' %}" class="text-sm text-teal-500 hover:underline ml-auto"> Esqueceu a senha? </a>
+                <a href="{% url 'accounts:password_reset' %}" class="text-sm text-teal-500 hover:underline ml-auto"> Esqueceu a senha? </a>
             </div>
             <div class="text-center mt-3">
-                <a href="{% url 'register' %}">Não tem conta? Registre-se</a>
+                <a href="{% url 'accounts:signup' %}">Não tem conta? Registre-se</a>
             </div>
 
             {% if form.errors %}
